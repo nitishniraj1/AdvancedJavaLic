@@ -1,0 +1,79 @@
+
+public class AssociationTest {
+
+	public static void main(String[] args) {
+		System.out.println("Hello Association....");
+		
+		Cloth myCloths[] = {
+				new Cloth(),
+				new Cloth(),
+				new Cloth()
+		};
+		
+		Water theWater = new Water();
+		Electricity electricity  = new Electricity();
+		WashingPowder theWashPowder = new WashingPowder();
+		
+		WashingMachine washMach = new WashingMachine();
+		Laundry theLaundry = washMach.wash(myCloths, theWater, electricity, theWashPowder);
+		theLaundry.printBill();
+
+	}
+
+}
+
+
+class Tub {}
+class WashingTub extends Tub { } // isA
+
+class Machine { }
+class WashingMachine extends Machine {  //isA
+	WashingTub washingTub  = new WashingTub();  //hasA
+	//producesA   usesA      usesA    usesA           usesA
+	Laundry wash(Cloth cl[], Water w, Electricity el, WashingPowder wp)
+	{
+		System.out.println("Washing.....");
+		Laundry laundry = new Laundry();
+//		laundry.laundryCost = cl.length * 50;
+		laundry.setLaundryCost(cl.length * 50); // if we declare variable private in Laundry class
+		
+		return laundry;
+	}
+	
+}
+
+class Powder { }
+class WashingPowder extends Powder { }
+
+class Water {}
+class Electricity { }
+class Cloth { }
+class Laundry { 
+//	float laundryCost;
+//	
+//	void printBill () {
+//		System.out.println("luandry cost is:"+laundryCost);
+//		
+//	}
+	
+	private float laundryCost;
+	
+	
+	
+	public float getLaundryCost() {
+		return laundryCost;
+	}
+
+
+
+	public void setLaundryCost(float laundryCost) {
+		this.laundryCost = laundryCost;
+	}
+
+
+
+	void printBill () {
+		System.out.println("luandry cost is:"+laundryCost);
+		
+	}
+}
